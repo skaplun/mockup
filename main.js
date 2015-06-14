@@ -28,7 +28,7 @@ var MixinFac = (function() {
         inertia: true,
         // keep the element within the area of it's parent
         restrict: {
-          restriction: "parent",
+          restriction: "#container",
           endOnly: true,
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
         },
