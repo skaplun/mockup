@@ -1,0 +1,853 @@
+<html>
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+      
+      <link rel="stylesheet" href="vex.css"></link>
+<link rel="stylesheet" href="vex-theme-wireframe.css"></link>
+<script src="vex.combined.min.js"></script>
+<script src="cropper.js"></script>
+<link rel="stylesheet" href="cropper.css"></link>
+<script src="crel.min.js"></script>
+<!--<script src="//cdn.quilljs.com/0.16.0/quill.min.js"></script>-->
+<!--<script src="vex.dialog.min.js"></script>-->
+
+    
+ <!--   
+<style>
+
+    body *{
+       
+
+    }
+
+   
+    table {
+        border: 3px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        border: 1px solid black;    
+    }
+
+    table {
+        
+    }
+    table td { 
+        text-indent: 18px;
+       
+    }
+
+
+
+
+   
+    input[type=submit] {
+        margin-top: 5px;
+
+
+    }
+
+    .rdsgn_logo{
+        position: absolute;
+        top: 40;
+        right: 40;
+        border: 3px solid black;
+        border-radius: 50%;
+        font-size: 35px;
+        width: 40px;
+        text-indent: 5px;
+         box-shadow: 2px 3px 3px rgba(123, 116, 116, 0.67);
+
+    }
+    
+  
+</style>
+
+
+    
+
+    
+<table><tr><th contenteditable="true">Header 1</th><th contenteditable="true">Header 2</th>
+    <th contenteditable="true">Header 3</th>
+  </tr>
+  <tr>
+    <td contenteditable="true">Cell 1</td>
+    <td contenteditable="true">Cell 2</td>
+    <td contenteditable="true">Cell 3</td>
+  </tr>
+  <tr>
+    <td contenteditable="true">Cell 4</td>
+    <td contenteditable="true">Cell 5</td>
+    <td contenteditable="true">Cell 6</td>
+  </tr>
+  <tr>
+    <td contenteditable="true">Cell 7</td>
+    <td contenteditable="true">Cell 8</td>
+    <td contenteditable="true">Cell 9</td>
+  </tr>
+</table>
+-->
+  
+<style>
+    
+    div.rd_m_container {
+        border: 3px solid black;
+        position: absolute;
+
+         
+    }
+    
+    div.rd_m_container *{
+        font-size: 20px;
+        font-family: Arial;
+        font-weight: 600;
+        color: rgba(16, 14, 14, 0.95);
+        border-color: rgba(16, 14, 14, 0.95);
+        
+    }
+    
+        div.rd_m_container > div {
+            position: absolute;
+        }
+
+
+    
+    ul.rd_m_toolbar_helpers,
+    ul.rd_m_toolbar {
+        display: flex;
+        position: absolute;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border: 3px solid black;
+        padding: 0;
+        margin: 0;
+        display: none;
+    
+    }
+    ul.rd_m_toolbar_helpers{
+        flex-direction: column; 
+     }
+     ul.rd_m_list > li,
+    ul.rd_m_toolbar_helpers > li,
+    ul.rd_m_toolbar > li {
+        list-style-type: none;
+        padding: 2px;
+    }
+    
+    div.rd_m_draghandler{
+        position: absolute;
+        display: none;
+        left: 0;
+        top: 0;
+        width: 15px;
+        min-width: 15px;
+        max-width: 25px;
+        height: 15px;
+        min-height: 15px;
+        max-height: 25px;
+        background: rgba(121, 118, 118, 0.43);
+        border-radius: 3px;
+        cursor: move;
+    }
+    
+    div.rd_m_save,
+    div.rd_m_freeze,
+    div.rd_m_cDel,
+    div.rd_m_del{
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    
+    div.rd_m_del{
+        display: none;
+        right: 0%;
+    }
+    
+    div.rd_m_save{
+        right: 20;
+
+    }
+    
+    div.rd_m_freeze{
+        right: 40;
+    }
+    
+    /* mockup widgets*/
+    
+     a.rd_m_a, ul.rd_m_list, h2.rd_m_h2, h1.rd_m_h1 {
+        max-width: 90%;
+        width: 25%;
+        min-width: 10%;
+        padding-left: 2px;
+        background-color: white;
+    } 
+    
+    h1.rd_m_h1{
+        font-size: 36px;
+    }
+
+    h2.rd_m_h2{
+        font-size: 28px;
+    }
+
+
+    p.rd_m_p, a.rd_m_a{
+        font-size: 18px;
+        max-width: 80%;
+
+    }
+    form.rd_m_form {
+        width: 36%;
+        min-width: 27%;
+        overflow: hidden;
+        height: 40%;
+        min-height: 30%;
+        background-color: white;
+    }
+
+    form.rd_m_form label,
+    form.rd_m_form input{
+        display: block;
+        font-size: inherit;
+        width: 100%;
+        height: 15%;
+        min-height: 10%;
+
+    }
+    
+    .rd_m_button {
+        border: 3px solid black;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 1.5;
+        width: 85px;
+        padding: 15px;
+        background-color: white;
+        
+    }
+    
+    .rd_m_elemsCont {
+        width: 99%;
+        height: 99%;
+        z-index: 1000;
+    }
+
+    
+    
+    div.rd_m_image{
+        position: absolute;
+        width:40%;
+        height:20%;
+        padding: 0;
+        margin: 0;
+        border:3px solid black;
+        
+
+    }
+    
+    div.rd_m_image > form {
+        font-size: 19px;
+    }
+
+    div.rd_m_image > form > input {
+        width: 120px;
+        position: relative;
+        margin: 5% 5%;
+        font-size: inherit;
+    }
+    </style>
+  
+
+
+  </head>
+  
+    
+<script>
+    
+
+ 
+Rdsgn = {}
+
+Rdsgn.mockup = (function(){
+  var baseZ = 1001,
+      containers = [],
+      moduleHTML = {
+          dragHandler : crel('div', {'class': 'rd_m_draghandler'}),
+          delbutton : crel('div', {'class': 'rd_m_del'}, 'X'),
+          container : crel('div', {'class': 'rd_m_container', 'data-rd_type' : 'c'},
+                         crel('div', {'class': 'rd_m_save'},'S'),
+                         crel('div', {'class': 'rd_m_cDel'},'X'),
+                         crel('div', {'class': 'rd_m_freeze'},'F'),
+                         crel('div', {'class': 'rd_m_elemsCont', 'data-rd_type' : 'ec'})
+                        ),
+          form : crel('form', {'class': 'rd_m_form', 'data-rd_type' : 'Form'}, 
+                      crel('label', {'for': 'first', contenteditable : 'true'}, 'first Label'),
+                      crel('input', {'name': 'first', type : 'text'}),
+                      crel('label', {'for': 'second', contenteditable : 'true'}, 'second Label'),
+                      crel('input', {'name': 'second', type : 'text'})
+                     ),
+          list : crel('ul', {'class': 'rd_m_list', 'data-rd_type' : 'list'}, 
+                      crel('li', {'contenteditable' : 'true'}, 'item 1'),
+                      crel('li', {'contenteditable': 'true'}, 'item 2'),
+                      crel('li', {'contenteditable': 'true'}, 'item 3') 
+                     ),
+          h1 : crel('h1', {'contenteditable': 'true', 'class' : 'rd_m_h1', 'data-rd_type' : 'h1'}, 'Title'), 
+          h2 :  crel('h2', {'contenteditable': 'true', 'class' : 'rd_m_h2', 'data-rd_type' : 'h2'}, 'Subtitle'),
+          paragraph : crel('p', {'contenteditable': 'true', 'class' : 'rd_m_p', 'data-rd_type' : 'p'}, 'Paragraph with lots of text'),
+          link : '<a href="#" onclick="(function(){return false;})" contenteditable="true" data-rd_type="a" class="rd_m_a">Link</a>',
+          button : crel('div', {'class': 'rd_m_button', 'data-rd_type' : 'Button'},
+                        crel('div', {'class': 'rd_m_text', 'contenteditable': 'true'}, 'Button')),
+          image : crel('div', {'class': 'rd_m_image', 'data-rd_type' : 'I'},
+                      crel('form', {'class': 'rd_m_save'},
+                           crel('input', {'type': 'file'})
+                )),
+          toolbar : crel('ul', {'class': 'rd_m_toolbar', 'data-rd_type' : 'toolbar'},
+                      crel('li', {'title': 'button', 'class': 'rd_m_t_btn', 'data-rd_type': 'button' }, 'B'),
+                      crel('li', {'title': 'list', 'class': 'rd_m_t_ul', 'data-rd_type': 'list' }, 'UL'),
+                      crel('li', {'title': 'form', 'class': 'rd_m_t_form', 'data-rd_type': 'form' }, 'F'),
+                      crel('li', {'title': 'table', 'class': 'rd_m_t_table', 'data-rd_type': 'table' }, 'T'),
+                      crel('li', {'title': 'header', 'class': 'rd_m_t_h1', 'data-rd_type': 'h1' }, 'H1'),
+                      crel('li', {'title': 'subheader', 'class': 'rd_m_t_h2', 'data-rd_type': 'h2' }, 'H2'),
+                      crel('li', {'title': 'paragraph', 'class': 'rd_m_t_p', 'data-rd_type': 'paragraph' }, 'P'),
+                      crel('li', {'title': 'link', 'class': 'rd_m_t_a', 'data-rd_type': 'link' }, 'A'),
+                      crel('li', {'title': 'image', 'class': 'rd_m_t_img', 'data-rd_type': 'image' }, 'IMG')
+                          ),
+          toolbarHelper : crel('ul', {'class': 'rd_m_toolbar_helpers', 'data-rd_type' : 'toolbar'},
+                      crel('li', {'title': 'zUp', 'class': 'rd_m_t_h_up', 'data-rd_type': 'zUp' }, 'UP'),
+                      crel('li', {'title': 'zDown', 'class': 'rd_m_t_h_down', 'data-rd_type': 'zDown' }, 'DWN'),
+                      crel('li', {'title': 'freeze', 'class': 'rd_m_t_h_freeze', 'data-rd_type': 'freeze' }, 'F')
+                              ),
+          optionsContainer : crel('div', {'class': 'rd_m_elem_opt'}, crel('button', 'submit'))
+       },
+      widgets = (function(){
+        var c = 0, el
+        for(el in moduleHTML){
+            if(moduleHTML.hasOwnProperty(el)) c+=1;
+        }
+        return c;
+    })();
+    
+    
+    function OptionsMenu(obj){
+        this.parent = obj;
+        this.showOpts();
+        
+        return this;
+    }
+    
+    OptionsMenu.prototype = {
+        getText : function(){
+            return this.parent.html.text() ? this.parent.html.text() : this.parent.html.find('.rd_m_text').text();
+        },
+        filterTextProps : function(s){
+            return s.filter(function(val){
+                if(val[0] !== 'f') return val;
+            })
+        },
+        getStyles : function(){
+            var stylesToGet = ['height', 'width', 'top', 'left', 'font-size', 'font-weight', 'color', 'background-color', 'border', 'border-radius'],
+                text = this.getText(), style = window.getComputedStyle(this.parent.html.get(0)), 
+                obj = {}, styleProp;
+            
+            if(!text) stylesToGet = this.filterTextProps(stylesToGet);
+            
+            stylesToGet.forEach(function(i){
+                styleProp = style.getPropertyValue(i)
+                obj[i] = styleProp[0] === 'r' ? styleProp.match(/d+,d+,d+/) : obj[i] = parseFloat(styleProp, 10);
+            })
+            
+            return obj
+        },
+        showOpts : function(){
+            var styles, s;
+            if(this.html) {
+                return this.html.focus();
+            }
+            styles = this.getStyles(); 
+            s = Object.keys(styles);
+            this.html = $(moduleHTML.optionsContainer).clone();
+               
+            
+            $('body').append(this.html);
+
+            this.html.css({
+                'border' : '1px solid black',
+                'position' : 'absolute',
+                'top' : '50px',
+                left : '50px'
+            })
+            
+            s.forEach(function(v){
+                this.html.prepend(crel('p', v + ':', crel('p', {'contenteditable': 'true'}, styles[v])))
+                    
+            }.bind(this))
+            
+            this.html.on('click', function(e){
+                if(e.target.tagName === 'BUTTON') return;
+            })
+            
+        },
+        
+    }
+    
+    function Container (config) {
+        this.config = config; 
+        this.count = 0;
+        this.c = $(moduleHTML.container).css(this.config);
+		this.t = $(moduleHTML.toolbar);
+        this.th = $(moduleHTML.toolbarHelper);
+		this.baseZ = baseZ+1;
+        this.lastActive;
+        this.elements = [];
+        this.elemCont = this.c.find('.rd_m_elemsCont');
+            
+    	this.c.on('click', this.handler.bind(this));
+        this.c.hover(this.toggleToolbars.bind(this));
+        this.t.on('click', this.addElemToMockup.bind(this))
+        this.th.on('click', this.helperHandler.bind(this));
+                      
+	};
+    
+    Container.prototype = {
+        toggleToolbars : function(){
+            this.t.toggle();
+			this.th.toggle();
+        },
+        emptySpaceClick : function(e){
+            return !e.target.dataset.rd_type || e.target.dataset.rd_type === 'toolbar';
+        },
+		freezeElem : function(that){
+			 if(!that) {
+				console.log('no last element');
+				return;
+			}
+				that
+                    .draggable( 'disable' )
+				    .resizable( 'disable' )
+				    .attr('contenteditable', false)
+                    .find('.rd_m_draghandler, .rd_m_del, .ui-resizable-handle').remove()
+		}, 
+		freezeAll : function(){
+		  this.elements.forEach(function(el){
+              this.freezeElem(el.html);
+          }.bind(this))
+		
+		},
+		zUpdate : function(el, up){
+            if(! el instanceof Object) return false;
+            if(up) el.html.css('zIndex', el.z = el.z + 1);
+            if(!up && el.z > 1000) el.html.css('zIndex',el.z = el.z - 1);            
+            return el.z;
+		},
+		addElemToMockup : function (e){
+            if(this.emptySpaceClick(e)) return;
+            var obj, data  = e.target.dataset.rd_type, 
+                elem = $(moduleHTML[data]).clone(), 
+                baseConfig = {
+                    z : this.baseZ, 
+                    parent : this.c,
+                    html : elem
+                };
+            this.c.append(elem)
+            obj = ElemFactory(baseConfig, data) 
+            return this.elements.push(this.lastActive = obj);
+              
+		},
+        findElObjFromTarget : function(target) {
+            return this.elements.filter(function(el){
+                return el.html.get(0) === target;
+            })[0];
+
+        },
+		handler : function(e){
+            var c = e.target.className, t = e.target;
+			if(c === 'rd_m_freeze') return this.freezeAll();
+            if(c === 'rd_m_cDel') return this.c.remove();
+            if(t.dataset.rd_type && 
+               t.parentElement.dataset.rd_type !== 'toolbar' ) 
+            return this.setActive(e.target);
+		},
+        helperHandler : function(e){
+            var d = e.target.dataset.rd_type;
+             if(this.emptySpaceClick(e)) return;
+    
+			 if( d === 'freeze') this.freezeElem(this.lastActive.html.get(0));
+			 if(d ==='zUp')      this.baseZ = this.zUpdate(this.lastActive, 1);
+			 if(d ==='zDown')    this.baseZ = this.zUpdate(this.lastActive, 0);
+        },
+        hideLastActive : function(){
+            var l = this.lastActive;
+            return l ? l.html.css('borderColor', 'black') : false;
+        },
+        addMenu : function(obj){
+            var o = obj.optionsMenu = new OptionsMenu(obj);
+            $('body').append(o.html);
+        },
+        setActive : function(target){
+            var l = this.lastActive;
+            if( l && l.optionsMenu) this.hideLastActive();
+            if(target.dataset.rd_type === 'e' || target.dataset.rd_type === 'ec') return;
+
+            this.lastActive = this.findElObjFromTarget(target);
+            l.html.css('borderColor', 'blue');
+            this.addMenu(l);
+            
+            
+        }
+	};
+    
+    function Elem(config) {
+        this.dragHandler = '.rd_m_draghandler';
+        this.delButton = '.rd_m_del';
+        this.z = config.z + 1;
+        this.parent = config.parent;        
+        this.html = typeof config.html === 'string' ? $(config.html) : config.html;
+        this.alsoResize = config.resize || this.html.find('.rd_m_text');
+        
+        this.augementHTML();
+        
+    };
+    
+    Elem.prototype = {
+		showDragOnHover : function (e) { 
+			return this.html.children('.rd_m_draghandler, .rd_m_del').toggle();
+		},
+        setResizeConstants : function(){
+             this.initFontSize = parseFloat(this.alsoResize.css('fontSize'), 10);
+             this.initWidth = this.html[0].clientWidth;
+        },
+        resizeText :  function(e, uiObj){
+            return this.alsoResize.css('fontSize', this.initFontSize * (uiObj.size.width / this.initWidth))
+        },
+        removeElem : function(){
+            if(this.optionsMenu) this.optionsMenu.html.hide();
+            return this.html.hide();
+        },
+        placeCaretAtEnd: function (e) {
+            if(e.which == 13) {
+                e.target.innerHTML +='<br>';
+                el = e.target
+                el.focus();
+                if (typeof window.getSelection != "undefined"
+                        && typeof document.createRange != "undefined") {
+                    var range = document.createRange();
+                    range.selectNodeContents(el);
+                    range.collapse(false);
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } else if (typeof document.body.createTextRange != "undefined") {
+                    var textRange = document.body.createTextRange();
+                    textRange.moveToElementText(el);
+                    textRange.collapse(false);
+                    textRange.select();
+                }
+            }
+        },
+        clickHandler : function(e){
+//            if(e.target === this.html.get(0)) this.selectAndShowOpts();
+            if(e.target.className === 'rd_m_del') return this.removeElem();
+        },
+        augementHTML : function(){
+            var that = this;
+            return this.html
+                .append(moduleHTML.dragHandler.cloneNode(true))
+                .append(moduleHTML.delbutton.cloneNode(true))
+             .css({
+                'zIndex': that.z,
+                'top' : '4%',
+                left : '4%' 
+            })
+            .draggable({
+                containment: 'parent',
+                handle: '.rd_m_draghandler'
+            })
+            .resizable({
+                alsoResize: '.rd_m_draghandler',
+                containment: 'parent',
+                create : that.setResizeConstants.bind(that),
+                resize : that.resizeText.bind(that)
+           
+            })
+            .on({'click': that.clickHandler.bind(that),
+                'keypress' : that.placeCaretAtEnd.bind(that)
+            })
+            .hover(that.showDragOnHover.bind(that));
+        },
+    };
+     
+    function ImageElem() {};
+    
+    ImageElem.prototype = Object.create(Elem.prototype);
+    
+    function ImageElem (config) {
+        var that;
+        config.resize = this.input = 'input'
+        Elem.call(this, config);
+        
+        that = this;
+        this.addImage = function(img, cropped) {
+            if(cropped){
+                return this.parent
+                            .empty()
+                            .append($(img).css('zIndex', this.z))
+            }else{
+                this.html.find('form').remove();
+                return this.html.append($(img).css('zIndex', this.z))
+            }
+        }
+    
+        this.html.find('input').change(function() {
+            Rdsgn.upload.readURL(this, parent, that.addImage.bind(that));
+        })
+    };
+
+    ImageElem.prototype.setResizeConstants = function() {
+        if(this.alsoResize === 'input') this.alsoResize = $(this.html.find(this.input));
+        this.initFontSize = parseFloat(this.alsoResize.css('fontSize'), 10);
+        this.inputWidth = this.alsoResize.width();
+        this.initWidth = this.html[0].clientWidth;
+    }
+    
+    ImageElem.prototype.resizeText =  function (e, uiObj) {
+        this.alsoResize.css('fontSize', this.initFontSize * (uiObj.size.width / this.initWidth - .1))
+        this.alsoResize.width(this.inputWidth * (uiObj.size.width / this.initWidth))
+    }
+    
+    
+    
+    function positionToolbars (container, toolbar, helper, config, widgets) {
+			var ratio, finalRow = 0, widgetWidth = 22, widgetHeight = 30, tLen = widgets * widgetWidth; 
+            
+            function calcRow(finalRow){
+                if(finalRow + widgetWidth >= config.width) return finalRow;
+                return calcRow(finalRow += widgetWidth);
+            }
+            
+            if(config.width < tLen){ 
+                
+                finalRow = calcRow(finalRow);
+                ratio = Math.ceil(tLen / finalRow);
+                finalHeight = widgetHeight * ratio;
+                
+                toolbar.height(finalHeight + 'px').css({ 
+                    width : finalRow,
+                    top : - ( toolbar.outerHeight() ) + 'px'
+				});                
+            }else{
+                toolbar.height(widgetHeight).css({ 
+                    width : widgets * widgetWidth,
+                    height : widgetHeight,
+                    top : -toolbar.outerHeight() + 'px'
+				});
+            }
+            
+            helper.css({
+                'left' : - helper.outerWidth()
+            })
+				
+		}
+    
+    function ElemFactory (baseConfig, extenderName) {
+        var extenderDict = {image:  ImageElem};
+        
+        return extenderName && Object.keys(extenderDict).indexOf(extenderName) > -1 ? 
+         new extenderDict[extenderName](baseConfig) : new Elem(baseConfig);     
+    }      
+    
+    function buildMockupContainer (config) {
+        var container;
+        if(!config) {
+            throw 'no config for container!';
+        }else{
+            if(config.width < 70 || config.height < 50) throw 'container is too small';
+            container = new Container(config);
+            containers.push(container);
+            $('body').append(
+                container.c
+                    .append(container.t)
+                    .append(container.th)
+            );        
+            positionToolbars(container.c, container.t, container.th, container.config, widgets)
+        }
+    }
+    
+    return {
+        buildMockupContainer : buildMockupContainer
+    }
+  
+})();
+
+
+Rdsgn.upload = (function(){    
+    
+    function cropInterface(e, input, parent, callback){
+        var selection;
+        function fn(){
+        selection = arguments[0];
+        }
+    
+        
+        var cropButton = $('<button class="vex-dialog-button-primary vex-dialog-button vex-first">Crop</button>'),
+            okButton = $('<button class="vex-dialog-button-secondary vex-dialog-button vex-second">Use Image</button>'),
+            result = e.target.result,
+            img = $('<img class="blabhbla"></img>').attr('src', result).css({
+            position: 'relative',
+            left: 20,
+            top: 20
+        }),
+            imgHtml = img.get(0),
+            iW = imgHtml.width,
+            iH = imgHtml.height;
+            
+            vex.dialog.open({
+            overlayClosesOnClick: false,
+            className : 'vex-theme-wireframe',
+            buttons: [],
+            contentCSS : {width: iW + 300, height: iH + 250},
+            message: 'Would you like to crop the image or use it as is?',
+            afterOpen: function($vexContent) {
+                 $vexContent
+                    .append(img)
+                    .append(cropButton)
+                    .append(okButton);
+                $('.blabhbla').Jcrop({
+                            maxSize: [parent.width(), parent.height()],
+                            onSelect: fn,
+                            onChange: fn,
+                      
+                    });
+                
+                    okButton.on('click', function(){
+                        $.Jcrop.disable()
+                         vex.close();
+                        callback(img, selection);
+                    })
+                    
+                     cropButton.on('click', function(){
+                         vex.close();
+                        crop(img, selection, callback);
+                               
+                         
+//                         console.log($vexContent.find('.blabhbla').get(0))
+//                         var cropArea = {
+//                            width: cropper.width(),
+//                            height: cropper.height(),
+//                            top: cropper.css('top'),
+//                            left: cropper.css('left')
+//                         }
+//                        crop(img, cropArea, callback)
+//                        vex.close();
+
+                    })
+                    
+            }
+        })
+
+    }
+    
+    function crop(img, cropArea, callback) {
+        var canvas = $('<canvas class="rd_hiddenCanvas"></canvas>').css({
+            width : img.width() + 'px', 
+            height: img.height() + 'px',
+        }),
+            imageObj = new Image(),
+            i = img.get(0),
+            i2 = $('<img class="hehehe"></img>'),
+            sx = cropArea.x,
+            sy = cropArea.y,
+            sWidth = cropArea.w,
+            sHeight = cropArea.h, 
+            dx = 0,
+            dy = 0,
+            dWidth =  cropArea.w,
+            dHeight = cropArea.h;
+        
+        $('body').append(canvas);
+        context = canvas.get(0).getContext('2d'),
+        
+        imageObj.src = i.src;
+        context.drawImage(imageObj, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+        $(canvas).hide()
+        $('body').append(i2)
+        i2
+            .css({width: cropArea.w +'px', height: cropArea.h +'px'})
+            .attr('src', canvas.get(0).toDataURL());
+        return callback(i2, 1)
+       
+        
+    }
+    
+    
+    function readURL(input, parent, callback) {
+        var img, reader;
+        if (input.files && input.files[0]) {
+            reader = new FileReader();
+            
+            reader.onload = function (e) {
+                cropInterface(e, input, parent, callback)
+            }
+            
+           reader.readAsDataURL(input.files[0]);
+        }
+        
+       
+    }   
+    
+    return {
+        readURL : readURL
+    }
+})();
+                
+        
+    
+$(function() {
+     
+  Rdsgn.mockup.buildMockupContainer({
+    top: 200,
+      left: 200,
+      width: 500,
+      height: 200
+  });
+    
+});
+
+</script>
+
+  
+
+
+    
+
+<!--
+<div class= 'rd_c'>
+    
+    <div class='controls'>
+        <div class='dragger'></div>
+        <div class='nav'>
+            <div>x</div><div>_</div>
+            <textarea></textarea>
+        </div>
+    </div>
+    <div class='conversation'>
+        <div>
+            <div class='vote'>&and;</div>
+            <div class='count'>0</div>
+            <div class='time'>3 mins ago</div>
+            <div class='name'>greg robinson</div>
+            <p>text text text text text text</p>
+        </div>
+    
+    </div>
+
+
+</div>
+-->
+
+
+</html>
