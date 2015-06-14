@@ -24,27 +24,22 @@ var MixinFac = (function() {
         
         elem.interactable = interact(elem.html)
             .draggable({
-        // enable inertial throwing
-        inertia: true,
-        // keep the element within the area of it's parent
-        restrict: {
-          restriction: "parent",
-          endOnly: true,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-        },
+                restrict: {
+                  restriction: "container",
+                },
 
-        // call this function on every dragmove event
-        onmove: dragMoveListener,
-        // call this function on every dragend event
-        onend: function (event) {
-          var textEl = event.target.querySelector('p');
+                // call this function on every dragmove event
+                onmove: dragMoveListener,
+                // call this function on every dragend event
+                onend: function (event) {
+                  var textEl = event.target.querySelector('p');
 
-          textEl && (textEl.textContent =
-            'moved a distance of '
-            + (Math.sqrt(event.dx * event.dx +
-                         event.dy * event.dy)|0) + 'px');
-        }
-        })
+                  textEl && (textEl.textContent =
+                    'moved a distance of '
+                    + (Math.sqrt(event.dx * event.dx +
+                                 event.dy * event.dy)|0) + 'px');
+                }
+            })
             .resizable({
     edges: { left: true, right: true, bottom: true, top: true }
   })
