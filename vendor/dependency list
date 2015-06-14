@@ -1,0 +1,15 @@
+Vendor version controls
+
+1. jquery ui - 1.11.4
+    1. custom build
+        1. core
+        2. widget
+        3. mouse
+        4.interactions
+            1. draggable
+            2. droppable
+            3. resizable
+            4. seletable
+            5. sortable
+            
+        
