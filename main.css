@@ -8,7 +8,12 @@
         
     }
      
-
+.rd_m_draghandler{
+    border: 1px solid pink;
+    width: 20px;
+    height: 20px;
+    
+}
 a.rd_m_a, ul.rd_m_list, h2.rd_m_h2, h1.rd_m_h1 {
         max-width: 90%;
         width: 25%;
